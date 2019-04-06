@@ -191,6 +191,15 @@ public class ViewData extends AnchorPane {
                 Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        newButton.setOnAction((event) -> {
+            newActor = true;
+            actorIdTF.clear();
+            firstNameTF.clear();
+            lastNameIdTF.clear();
+            lastUpdateTF.clear();
+        });
+
     }
 
 }
