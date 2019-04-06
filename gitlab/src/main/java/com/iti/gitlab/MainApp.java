@@ -6,20 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import result.set.gui.ViewData;
 
 
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        ViewData root = new ViewData();
         
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        Scene scene = new Scene(root, 600, 400);
         
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setTitle("Registeration");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest((event) -> {
+            System.exit(0);
+        });
     }
 
     /**
