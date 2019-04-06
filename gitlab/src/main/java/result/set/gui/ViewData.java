@@ -6,10 +6,7 @@
 package result.set.gui;
 
 //Bishoy
-
 import javafx.scene.layout.AnchorPane;
-
-
 
 //Sara
 import java.sql.SQLException;
@@ -19,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
 /**
  *
  * @author Bishoy
@@ -26,7 +24,6 @@ import javafx.scene.layout.AnchorPane;
 public class ViewData extends AnchorPane {
 
     //Bishoy
-
     //Sara
     protected final TextField actorIdTF;
     protected final TextField lastUpdateTF;
@@ -150,7 +147,7 @@ public class ViewData extends AnchorPane {
         getChildren().add(nextButton);
         getChildren().add(previousButton);
         getChildren().add(newButton);
-        
+
         DataSourceConnection dataSource = new DataSourceConnection();
 
         try {
@@ -162,10 +159,24 @@ public class ViewData extends AnchorPane {
         } catch (SQLException ex) {
             Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //Bishoy
-        
         //Sara
+        nextButton.setOnAction((event) -> {
+            try {
+                if (dataSource.resultSet.next()) {
+                    actorIdTF.setText(dataSource.resultSet.getString(1));
+                    firstNameTF.setText(dataSource.resultSet.getString(2));
+                    lastNameIdTF.setText(dataSource.resultSet.getString(3));
+                    lastUpdateTF.setText(dataSource.resultSet.getString(4));
+                } else {
+                    dataSource.resultSet.previous();
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
 }
