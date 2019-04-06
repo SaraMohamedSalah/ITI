@@ -7,6 +7,7 @@ package result.set.gui;
 
 //Bishoy
 import javafx.scene.layout.AnchorPane;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 //Sara
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 public class ViewData extends AnchorPane {
 
     //Bishoy
+    
     //Sara
     protected final TextField actorIdTF;
     protected final TextField lastUpdateTF;
@@ -161,7 +163,41 @@ public class ViewData extends AnchorPane {
         }
 
         //Bishoy
-        
+         updateButton.setOnAction((event) -> {
+            if (newActor) {
+                if (actorIdTF.getText() != null) {
+                    try {
+                        dataSource.resultSet.moveToInsertRow();
+
+                        dataSource.resultSet.updateInt(1, Integer.parseInt(actorIdTF.getText()));
+                        dataSource.resultSet.updateString(2, firstNameTF.getText());
+                        dataSource.resultSet.updateString(3, lastNameIdTF.getText());
+                        dataSource.resultSet.updateString(3, lastUpdateTF.getText());
+
+                        dataSource.resultSet.insertRow();
+
+                        newActor = false;
+                    } catch (SQLIntegrityConstraintViolationException e) {
+                        e.printStackTrace();
+                        System.out.println("Duplicate ID");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                try {
+                    dataSource.resultSet.updateInt(1, Integer.parseInt(actorIdTF.getText()));
+                    dataSource.resultSet.updateString(2, firstNameTF.getText());
+                    dataSource.resultSet.updateString(3, lastNameIdTF.getText());
+                    dataSource.resultSet.updateString(3, lastUpdateTF.getText());
+
+                }catch (SQLException ex) {
+                    Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        });
         //Sara
         nextButton.setOnAction((event) -> {
             try {
@@ -214,7 +250,6 @@ public class ViewData extends AnchorPane {
                 Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        //Sara
     
     }
 
