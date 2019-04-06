@@ -223,8 +223,18 @@ public class ViewData extends AnchorPane {
                 Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        deleteButton.setOnAction((event) -> {
+            if (actorIdTF.getText() != "") {
+                try {
+                    dataSource.resultSet.deleteRow();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         //Sara
-    
+        
     }
 
 }
