@@ -161,6 +161,7 @@ public class ViewData extends AnchorPane {
         }
 
         //Bishoy
+        
         //Sara
         nextButton.setOnAction((event) -> {
             try {
@@ -191,6 +192,30 @@ public class ViewData extends AnchorPane {
                 Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        firstButton.setOnAction((event) -> {
+            try {
+                dataSource.resultSet.first();
+                actorIdTF.setText(dataSource.resultSet.getString(1));
+                firstNameTF.setText(dataSource.resultSet.getString(2));
+                lastNameIdTF.setText(dataSource.resultSet.getString(3));
+                lastUpdateTF.setText(dataSource.resultSet.getString(4));
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        lastButton.setOnAction((event) -> {
+            try {
+                dataSource.resultSet.last();
+                actorIdTF.setText(dataSource.resultSet.getString(1));
+                firstNameTF.setText(dataSource.resultSet.getString(2));
+                lastNameIdTF.setText(dataSource.resultSet.getString(3));
+                lastUpdateTF.setText(dataSource.resultSet.getString(4));
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        //Sara
+    
     }
 
 }
