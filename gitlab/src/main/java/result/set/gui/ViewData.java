@@ -177,6 +177,20 @@ public class ViewData extends AnchorPane {
                 Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        previousButton.setOnAction((event) -> {
+            try {
+                if (dataSource.resultSet.previous()) {
+                    actorIdTF.setText(dataSource.resultSet.getString(1));
+                    firstNameTF.setText(dataSource.resultSet.getString(2));
+                    lastNameIdTF.setText(dataSource.resultSet.getString(3));
+                    lastUpdateTF.setText(dataSource.resultSet.getString(4));
+                } else {
+                    dataSource.resultSet.next();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
 }
